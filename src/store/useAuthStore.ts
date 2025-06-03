@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface UserProps {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -20,10 +20,10 @@ export const useAuthStore = create<AuthStoreProps>((set) => ({
   error: null,
   signUp: (newUser) =>
     set((state) => {
-      const nameExists = state.users.some((u) => u.name === newUser.name);
+      const usernameExists = state.users.some((u) => u.username === newUser.username);
       const emailExists = state.users.some((u) => u.email === newUser.email);
 
-      if (nameExists) {
+      if (usernameExists) {
         return { error: "Username is already taken" };
       }
 
@@ -41,7 +41,7 @@ export const useAuthStore = create<AuthStoreProps>((set) => ({
     set((state) => {
       const foundUser = state.users.find(
         (u) =>
-          u.name === credentials.name &&
+          u.username === credentials.username &&
           u.email === credentials.email &&
           u.password === credentials.password
       );
