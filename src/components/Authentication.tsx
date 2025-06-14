@@ -5,15 +5,32 @@ import { motion } from "framer-motion";
 import { useAuthStore } from "@/store/useAuthStore";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { CircleAlert } from "lucide-react";
+import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 
 const Authentication = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const { error } = useAuthStore();
 
+  const welcomeWords = [
+    {
+      text: "Welcome",
+    },
+    {
+      text: "To",
+    },
+    {
+      text: "TaskWave🌊",
+    },
+  ];
+
   return (
     <div>
       <div className="relative flex flex-col justify-center items-center h-screen overflow-hidden">
+        <div className="flex justify-center select-none">
+          <TypewriterEffectSmooth className="text-sm" words={welcomeWords} />
+        </div>
+
         <div className="flex items-center gap-50">
           <SignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
 
