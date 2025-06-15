@@ -12,13 +12,13 @@ interface TaskStoreProps {
   allTasks: TaskProps[];
   tasks: TaskProps[];
   searchTerm: string;
-  status: string | null;
-  priority: string | null;
+  status: string;
+  priority: string;
   isEditing: null | string;
 
   setSearchTerm: (newSearchTerm: string) => void;
-  setStatus: (newStatus: string | null) => void;
-  setPriority: (newPriority: string | null) => void;
+  setStatus: (newStatus: string) => void;
+  setPriority: (newPriority: string) => void;
   setTasks: (newTasks: TaskProps[]) => void;
   filterTasks: () => void;
   setIsEditing: (id: string) => void;
@@ -30,8 +30,8 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
   allTasks: [],
   tasks: [],
   searchTerm: "",
-  status: null,
-  priority: null,
+  status: "",
+  priority: "",
   isEditing: null,
 
   setSearchTerm: (newSearchTerm) => set({ searchTerm: newSearchTerm }),
@@ -50,11 +50,11 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
       );
     }
 
-    if (status !== null) {
+    if (status !== "") {
       filtered = filtered.filter((task) => task.status === status);
     }
 
-    if (priority !== null) {
+    if (priority !== "") {
       filtered = filtered.filter((task) => task.priority === priority);
     }
 
