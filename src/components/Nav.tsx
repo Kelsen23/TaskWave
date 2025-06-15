@@ -10,7 +10,7 @@ const Nav = () => {
   const { isLoggedIn } = useAuthStore();
 
   return (
-    <nav className="p-3 w-full flex fixed justify-around items-center border-b-1 backdrop-blur-md bg-blue-300/10 border-blue-300">
+    <nav className="p-3 w-full flex justify-around items-center border-b-1 backdrop-blur-md bg-blue-300/10 border-blue-300">
       <div className="text-2xl font-bold select-none">
         <span>Task</span>
         <span className="text-blue-500">Wave🌊</span>
