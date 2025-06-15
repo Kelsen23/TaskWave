@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
-import { PriorityCombobox } from "./PriorityCombobox";
-import { StatusCombobox } from "./StatusCombobox";
+import { PriorityCombobox } from "./ui/PriorityCombobox";
+import { StatusCombobox } from "./ui/StatusCombobox";
 
 const Filters = () => {
   return (
