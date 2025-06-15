@@ -4,20 +4,37 @@ import { StatusCombobox } from "./ui/StatusCombobox";
 
 const Filters = () => {
   return (
-    <div className="m-16 mr-5 flex flex-row gap-3">
-      <div className="relative w-72">
-        <input
-          type="text"
-          placeholder="Search your tasks"
-          className="w-full px-10 py-2 rounded-full border border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm placeholder-gray-500 shadow-sm transition duration-200"
-        />
-        <Search
-          size={18}
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-        />
+    <div className="m-16 mr-5 flex flex-row gap-3 items-center">
+      <div className="relative w-72 flex flex-col">
+        <p className="text-sm text-gray-500 ml-3 mb-1 select-none">
+          Filter by searching
+        </p>
+
+        <div className="flex items-center">
+          <input
+            type="text"
+            placeholder="Search your tasks"
+            className="w-full px-10 py-2 rounded-full border border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm placeholder-gray-500 shadow-sm transition duration-200"
+          />
+          <Search size={18} className="absolute left-3 text-gray-400" />
+        </div>
       </div>
-      <StatusCombobox />
-      <PriorityCombobox />
+
+      <div className="flex flex-col">
+        <p className="text-sm text-gray-500 ml-3 mb-1 select-none">
+          Filter by status
+        </p>
+
+        <StatusCombobox />
+      </div>
+
+      <div className="flex flex-col">
+        <p className="text-sm text-gray-500 ml-3 mb-1 select-none">
+          Filter by priority
+        </p>
+
+        <PriorityCombobox />
+      </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const TaskManager = () => {
   return (
     <div>
       <Nav />
-      <div className="flex flex-row items-center">
+      <div className="flex flex-col items-center">
         <Filters />
         <HoverBorderGradient
           containerClassName="rounded-full"
