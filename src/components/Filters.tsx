@@ -4,7 +4,7 @@ import { StatusCombobox } from "./ui/StatusCombobox";
 
 const Filters = () => {
   return (
-    <div className="m-18 flex flex-row gap-3">
+    <div className="m-16 mr-5 flex flex-row gap-3">
       <div className="relative w-72">
         <input
           type="text"
