@@ -1,12 +1,7 @@
 {
-  "projects": [
-    { "id": "1", "name": "Frontend Revamp" },
-    { "id": "2", "name": "Backend Cleanup" }
-  ],
   "tasks": [
     {
       "id": "1",
-      "projectId": "1",
       "title": "Fix navbar",
       "status": "pending",
       "dueDate": "2025-06-01",
@@ -14,7 +9,6 @@
     },
     {
       "id": "2",
-      "projectId": "1",
       "title": "Add footer",
       "status": "completed",
       "dueDate": "2025-06-02",
@@ -22,7 +16,6 @@
     },
     {
       "id": "3",
-      "projectId": "2",
       "title": "Refactor API",
       "status": "pending",
       "dueDate": "2025-06-05",
