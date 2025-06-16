@@ -69,8 +69,8 @@ const TaskManager = () => {
 
       if (!res.ok) throw new Error("Failed to update task");
       return res.json();
-    } catch (err) {
-      console.error("Update failed:", err);
+    } catch (error) {
+      console.error("Update failed:", error);
     }
   };
 
