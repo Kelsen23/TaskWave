@@ -69,17 +69,18 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
   },
   setIsEditing: (task) => set({ isEditing: task }),
   stopEditing: () => set({ isEditing: null }),
-  startCreatingTask: () => ({
-    isCreating: {
-      id: "",
-      title: "",
-      status: "",
-      dueDate: "",
-      priority: "",
-    },
-  }),
-  stopCreatingTask: () => ({
-    isCreating: null,
+  startCreatingTask: () =>
+    set({
+      isCreatingTask: {
+        id: crypto.randomUUID(),
+        title: "",
+        status: "pending",
+        dueDate: new Date("2025-06-01").toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }),
+        priority: "low",
+      },
+    }),
+  stopCreatingTask: () => set({
+    isCreatingTask: null,
   }),
   deleteAll: () => ({ allTask: [], tasks: [] }),
   updateTask: (updatedTask) => {
