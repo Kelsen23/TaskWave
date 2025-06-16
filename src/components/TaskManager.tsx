@@ -9,9 +9,10 @@ import { useEffect } from "react";
 import Task from "./Task";
 import { motion } from "motion/react";
 import EditingModal from "./EditingModal";
+import CreatingModal from "./CreatingModal";
 
 const TaskManager = () => {
-  const { tasks,  isEditing, setTasks, stopEditing } = useTaskStore();
+  const { tasks,  isEditing, isCreatingTask, startCreatingTask, setTasks, stopEditing } = useTaskStore();
 
   const getTasks = async () => {
     try {
@@ -116,6 +117,7 @@ const TaskManager = () => {
         <Filters />
         <div className="flex flex-row gap-4">
           <HoverBorderGradient
+          onClick={startCreatingTask}
             containerClassName="rounded-full"
             as="button"
             className="cursor-pointer bg-white text-black flex items-center space-x-2"
@@ -156,6 +158,7 @@ const TaskManager = () => {
       </div>
 
       {isEditing && <EditingModal updateTaskMutation={updateTaskMutation} />}
+      {isCreatingTask && <CreatingModal addTaskMutation={addTaskMutation} />}
     </div>
   );
 };
