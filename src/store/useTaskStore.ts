@@ -14,7 +14,7 @@ interface TaskStoreProps {
   searchTerm: string;
   status: string;
   priority: string;
-  isCreating: boolean;
+  isCreating: null | TaskProps;
   isEditing: null | TaskProps;
 
   setSearchTerm: (newSearchTerm: string) => void;
@@ -36,7 +36,7 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
   searchTerm: "",
   status: "",
   priority: "",
-  isCreating: false,
+  isCreating: null,
   isEditing: null,
 
   setSearchTerm: (newSearchTerm) => set({ searchTerm: newSearchTerm }),
@@ -69,8 +69,16 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
   },
   setIsEditing: (task) => set({ isEditing: task }),
   stopEditing: () => set({ isEditing: null }),
-  startCreating: () => ({ isCreating: true }),
-  stopCreating: () => ({ isCreating: false }),
+  startCreating: () => ({ isCreating: {
+    id: "",
+    title: "",
+    status: "",
+    dueDate: "",
+    priority: "",
+  }, }),
+  stopCreating: () => ({
+    isCreating: null
+  }),
   deleteAll: () => ({ allTask: [], tasks: [] }),
   updateTask: (updatedTask) => {
     const { allTasks, isEditing } = get();
