@@ -75,7 +75,7 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
         id: crypto.randomUUID(),
         title: "",
         status: "pending",
-        dueDate: new Date("2025-06-01").toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }),
+        dueDate: new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }),
         priority: "low",
       },
     }),

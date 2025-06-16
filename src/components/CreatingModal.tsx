@@ -78,6 +78,21 @@ const CreatingModal = ({ addTaskMutation }: { addTaskMutation: UseMutationResult
               <option value="high">High</option>
             </select>
 
+            <input
+              type="date"
+              value={
+                isAdding.dueDate
+                  ? new Date(isAdding.dueDate).toISOString().split("T")[0]
+                  : ""
+              }
+              onChange={(e) =>
+                setIsAdding((prev) =>
+                  prev ? { ...prev, dueDate: e.target.value } : prev
+                )
+              }
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
             <div className="flex justify-end gap-2">
               <button
                 type="button"

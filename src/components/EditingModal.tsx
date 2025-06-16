@@ -3,7 +3,11 @@ import type { UseMutationResult } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
-const EditingModal = ({ updateTaskMutation }: { updateTaskMutation: UseMutationResult<any, Error, TaskProps> }) => {
+const EditingModal = ({
+  updateTaskMutation,
+}: {
+  updateTaskMutation: UseMutationResult<any, Error, TaskProps>;
+}) => {
   const { isEditing, stopEditing } = useTaskStore();
 
   const [editingForm, setEditingForm] = useState(isEditing);
@@ -77,6 +81,21 @@ const EditingModal = ({ updateTaskMutation }: { updateTaskMutation: UseMutationR
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
+
+            <input
+              type="date"
+              value={
+                editingForm.dueDate
+                  ? new Date(editingForm.dueDate).toISOString().split("T")[0]
+                  : ""
+              }
+              onChange={(e) =>
+                setEditingForm((prev) =>
+                  prev ? { ...prev, dueDate: e.target.value } : prev
+                )
+              }
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
 
             <div className="flex justify-end gap-2">
               <button
