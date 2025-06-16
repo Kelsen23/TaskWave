@@ -12,7 +12,14 @@ import EditingModal from "./EditingModal";
 import CreatingModal from "./CreatingModal";
 
 const TaskManager = () => {
-  const { tasks,  isEditing, isCreatingTask, startCreatingTask, setTasks, stopEditing } = useTaskStore();
+  const {
+    tasks,
+    isEditing,
+    isCreatingTask,
+    startCreatingTask,
+    setTasks,
+    stopEditing,
+  } = useTaskStore();
 
   const getTasks = async () => {
     try {
@@ -42,6 +49,20 @@ const TaskManager = () => {
     } catch (error) {
       console.error("Something went wrong:", error);
     }
+  };
+
+  const deleteAllTasks = async () => {
+    const res = await fetch("http://localhost:3000/tasks");
+    if (!res.ok) throw new Error("Failed to fetch tasks");
+    const tasks = await res.json();
+
+    await Promise.all(
+      tasks.map((task: TaskProps) =>
+        fetch(`http://localhost:3000/tasks/${task.id}`, {
+          method: "DELETE",
+        })
+      )
+    );
   };
 
   const deleteTask = async (taskId: string) => {
@@ -84,6 +105,13 @@ const TaskManager = () => {
     },
   });
 
+  const deleteAllTasksMutation = useMutation({
+    mutationFn: deleteAllTasks,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] })
+    }
+  })
+
   const deleteTaskMutation = useMutation({
     mutationFn: deleteTask,
     onSuccess: () => {
@@ -92,12 +120,12 @@ const TaskManager = () => {
   });
 
   const updateTaskMutation = useMutation({
-  mutationFn: updateTask,
-  onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ["tasks"] });
-    stopEditing(); 
-  },
-});
+    mutationFn: updateTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      stopEditing();
+    },
+  });
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["tasks"],
@@ -117,7 +145,7 @@ const TaskManager = () => {
         <Filters />
         <div className="flex flex-row gap-4">
           <HoverBorderGradient
-          onClick={startCreatingTask}
+            onClick={startCreatingTask}
             containerClassName="rounded-full"
             as="button"
             className="cursor-pointer bg-white text-black flex items-center space-x-2"
@@ -126,7 +154,7 @@ const TaskManager = () => {
             <span>Create New Task</span>
           </HoverBorderGradient>
 
-          <button className="flex flex-row gap-2 items-center bg-red-500 px-4 py-2 rounded-full text-white shadow-sm cursor-pointer hover:bg-white hover:text-red-500 transition-all ease-in duration-150">
+          <button onClick={() => deleteAllTasksMutation.mutate()} className="flex flex-row gap-2 items-center bg-red-500 px-4 py-2 rounded-full text-white shadow-sm cursor-pointer hover:bg-white hover:text-red-500 transition-all ease-in duration-150">
             <Trash2 size={20} />
             <span>Delete All Tasks</span>
           </button>
