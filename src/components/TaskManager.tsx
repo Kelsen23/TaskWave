@@ -11,7 +11,7 @@ import { motion } from "motion/react";
 import EditingModal from "./EditingModal";
 
 const TaskManager = () => {
-  const { tasks, setTasks, isEditing, stopEditing } = useTaskStore();
+  const { tasks,  isEditing, setTasks, stopEditing } = useTaskStore();
 
   const getTasks = async () => {
     try {
