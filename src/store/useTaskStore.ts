@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface TaskProps {
+export interface TaskProps {
   id: string;
   title: string;
   status: string;
@@ -15,14 +15,14 @@ interface TaskStoreProps {
   status: string;
   priority: string;
   isCreating: boolean;
-  isEditing: null | string;
+  isEditing: null | TaskProps;
 
   setSearchTerm: (newSearchTerm: string) => void;
   setStatus: (newStatus: string) => void;
   setPriority: (newPriority: string) => void;
   setTasks: (newTasks: TaskProps[]) => void;
   filterTasks: () => void;
-  setIsEditing: (id: string) => void;
+  setIsEditing: (task: TaskProps) => void;
   stopEditing: () => void;
   startCreating: () => void;
   stopCreating: () => void;
@@ -67,7 +67,7 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
       tasks: filtered,
     });
   },
-  setIsEditing: (id) => set({ isEditing: id }),
+  setIsEditing: (task) => set({ isEditing: task }),
   stopEditing: () => set({ isEditing: null }),
   startCreating: () => ({ isCreating: true }),
   stopCreating: () => ({ isCreating: false }),
@@ -75,7 +75,7 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
   updateTask: (updatedTask) => {
     const { allTasks, isEditing } = get();
     const updatedTasks = allTasks.map((task) =>
-      task.id === isEditing ? updatedTask : task
+      task.id === isEditing?.id ? updatedTask : task
     );
 
     set({ allTasks: updatedTasks, tasks: updatedTasks, isEditing: null });

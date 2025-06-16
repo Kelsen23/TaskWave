@@ -16,7 +16,7 @@ interface AuthStoreProps {
 
 export const useAuthStore = create<AuthStoreProps>((set) => ({
   users: [],
-  isLoggedIn: null,
+  isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn") || "null"),
   error: null,
   signUp: (newUser) =>
     set((state) => {
