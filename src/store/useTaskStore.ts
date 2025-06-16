@@ -14,6 +14,7 @@ interface TaskStoreProps {
   searchTerm: string;
   status: string;
   priority: string;
+  isCreating: boolean;
   isEditing: null | string;
 
   setSearchTerm: (newSearchTerm: string) => void;
@@ -23,6 +24,9 @@ interface TaskStoreProps {
   filterTasks: () => void;
   setIsEditing: (id: string) => void;
   stopEditing: () => void;
+  startCreating: () => void;
+  stopCreating: () => void;
+  deleteAll: () => void;
   updateTask: (updatedTask: TaskProps) => void;
 }
 
@@ -32,6 +36,7 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
   searchTerm: "",
   status: "",
   priority: "",
+  isCreating: false,
   isEditing: null,
 
   setSearchTerm: (newSearchTerm) => set({ searchTerm: newSearchTerm }),
@@ -64,6 +69,9 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
   },
   setIsEditing: (id) => set({ isEditing: id }),
   stopEditing: () => set({ isEditing: null }),
+  startCreating: () => ({ isCreating: true }),
+  stopCreating: () => ({ isCreating: false }),
+  deleteAll: () => ({ allTask: [], tasks: [] }),
   updateTask: (updatedTask) => {
     const { allTasks, isEditing } = get();
     const updatedTasks = allTasks.map((task) =>
