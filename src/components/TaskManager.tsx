@@ -108,9 +108,9 @@ const TaskManager = () => {
   const deleteAllTasksMutation = useMutation({
     mutationFn: deleteAllTasks,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] })
-    }
-  })
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
 
   const deleteTaskMutation = useMutation({
     mutationFn: deleteTask,
@@ -154,7 +154,10 @@ const TaskManager = () => {
             <span>Create New Task</span>
           </HoverBorderGradient>
 
-          <button onClick={() => deleteAllTasksMutation.mutate()} className="flex flex-row gap-2 items-center bg-red-500 px-4 py-2 rounded-full text-white shadow-sm cursor-pointer hover:bg-white hover:text-red-500 transition-all ease-in duration-150">
+          <button
+            onClick={() => deleteAllTasksMutation.mutate()}
+            className="flex flex-row gap-2 items-center bg-red-500 px-4 py-2 rounded-full text-white shadow-sm cursor-pointer hover:bg-white hover:text-red-500 transition-all ease-in duration-150"
+          >
             <Trash2 size={20} />
             <span>Delete All Tasks</span>
           </button>

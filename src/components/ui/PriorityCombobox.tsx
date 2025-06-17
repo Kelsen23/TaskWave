@@ -13,7 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 const priorities = [
@@ -22,9 +22,17 @@ const priorities = [
   { value: "high", label: "High" },
 ];
 
-export function PriorityCombobox() {
+export function PriorityCombobox({
+  setPriority,
+}: {
+  setPriority: (newPriority: string) => void;
+}) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setPriority(value);
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

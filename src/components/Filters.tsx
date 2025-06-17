@@ -1,8 +1,24 @@
 import { Search } from "lucide-react";
 import { PriorityCombobox } from "./ui/PriorityCombobox";
 import { StatusCombobox } from "./ui/StatusCombobox";
+import { useTaskStore } from "@/store/useTaskStore";
+import { useEffect } from "react";
 
 const Filters = () => {
+  const {
+    searchTerm,
+    status,
+    priority,
+    setSearchTerm,
+    setStatus,
+    setPriority,
+    filterTasks,
+  } = useTaskStore();
+
+  useEffect(() => {
+    filterTasks();
+  }, [searchTerm, status, priority]);
+
   return (
     <div className="m-16 mr-5 flex flex-row gap-3 items-center">
       <div className="relative w-72 flex flex-col">
@@ -12,6 +28,7 @@ const Filters = () => {
 
         <div className="flex items-center">
           <input
+            onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             placeholder="Search your tasks"
             className="w-full px-10 py-2 rounded-full border border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm placeholder-gray-500 shadow-sm transition duration-200"
@@ -25,7 +42,7 @@ const Filters = () => {
           Filter by status
         </p>
 
-        <StatusCombobox />
+        <StatusCombobox setStatus={setStatus} />
       </div>
 
       <div className="flex flex-col">
@@ -33,7 +50,7 @@ const Filters = () => {
           Filter by priority
         </p>
 
-        <PriorityCombobox />
+        <PriorityCombobox setPriority={setPriority} />
       </div>
     </div>
   );
