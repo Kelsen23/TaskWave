@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/useAuthStore";
 import { motion } from "framer-motion";
 import { LogOut, X } from "lucide-react";
 
@@ -6,6 +7,8 @@ const Menu = ({
 }: {
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const { logOut } = useAuthStore();
+
   return (
     <motion.div
       initial={{ x: 200 }}
@@ -26,7 +29,10 @@ const Menu = ({
         </div>
 
         <div>
-          <button className="group flex items-center gap-3 w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-200 ease-in-out">
+          <button
+            onClick={logOut}
+            className="group flex items-center gap-3 w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-200 ease-in-out"
+          >
             <LogOut
               size={20}
               className="text-gray-500 group-hover:text-black transition"

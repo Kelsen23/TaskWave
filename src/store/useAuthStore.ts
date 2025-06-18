@@ -12,15 +12,36 @@ interface AuthStoreProps {
   error: null | string;
   signUp: (user: UserProps) => void;
   logIn: (user: UserProps) => void;
+  logOut: () => void;
+}
+
+function getUsersFromStorage(): UserProps[] {
+  try {
+    const users = localStorage.getItem("users");
+    return users ? JSON.parse(users) : [];
+  } catch {
+    return [];
+  }
+}
+
+function getLoggedInFromStorage(): UserProps | null {
+  try {
+    const loggedIn = localStorage.getItem("isLoggedIn");
+    return loggedIn ? JSON.parse(loggedIn) : null;
+  } catch {
+    return null;
+  }
 }
 
 export const useAuthStore = create<AuthStoreProps>((set) => ({
-  users: [],
-  isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn") || "null"),
+  users: getUsersFromStorage(),
+  isLoggedIn: getLoggedInFromStorage(),
   error: null,
   signUp: (newUser) =>
     set((state) => {
-      const usernameExists = state.users.some((u) => u.username === newUser.username);
+      const usernameExists = state.users.some(
+        (u) => u.username === newUser.username
+      );
       const emailExists = state.users.some((u) => u.email === newUser.email);
 
       if (usernameExists) {

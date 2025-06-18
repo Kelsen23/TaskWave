@@ -5,13 +5,16 @@ import { CirclePlus } from "lucide-react";
 import { Trash2 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTaskStore, type TaskProps } from "@/store/useTaskStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Task from "./Task";
-import { motion } from "motion/react";
 import EditingModal from "./EditingModal";
 import CreatingModal from "./CreatingModal";
+import Menu from "./Menu";
+import { AnimatePresence } from "framer-motion";
 
 const TaskManager = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const {
     tasks,
     isEditing,
@@ -139,8 +142,13 @@ const TaskManager = () => {
   }, [data]);
 
   return (
-    <div>
-      <Nav />
+    <div className="relative">
+      <AnimatePresence mode="wait">
+        {isMenuOpen && <Menu setIsMenuOpen={setIsMenuOpen} />}
+      </AnimatePresence>
+
+      <Nav setIsMenuOpen={setIsMenuOpen} />
+
       <div className="flex flex-col items-center">
         <Filters />
         <div className="flex flex-row gap-4">
@@ -163,20 +171,21 @@ const TaskManager = () => {
           </button>
         </div>
       </div>
-
       <div className="ml-20 mt-20">
         <p className="font-semibold text-3xl">My Tasks</p>
 
         {tasks && tasks.length > 0 ? (
           <div className="w-full p-3 rounded-md my-10 mr-20 justify-items-center grid grid-cols-1 sm:grid-cols-1 justify-center md:grid-cols-1 lg:grid-cols-2 gap-8">
-            {tasks.map((task, index) => (
-              <Task
-                key={task.id}
-                deleteTaskMutation={deleteTaskMutation}
-                task={task}
-                index={index}
-              />
-            ))}
+            <AnimatePresence>
+              {tasks.map((task, index) => (
+                <Task
+                  key={task.id}
+                  deleteTaskMutation={deleteTaskMutation}
+                  task={task}
+                  index={index}
+                />
+              ))}
+            </AnimatePresence>
           </div>
         ) : (
           <p className="font-semibold text-lg mt-20 ml-10 text-gray-400">
@@ -184,9 +193,13 @@ const TaskManager = () => {
           </p>
         )}
       </div>
+      <AnimatePresence>
+        {isEditing && <EditingModal updateTaskMutation={updateTaskMutation} />}
+      </AnimatePresence>
 
-      {isEditing && <EditingModal updateTaskMutation={updateTaskMutation} />}
-      {isCreatingTask && <CreatingModal addTaskMutation={addTaskMutation} />}
+      <AnimatePresence>
+        {isCreatingTask && <CreatingModal addTaskMutation={addTaskMutation} />}
+      </AnimatePresence>
     </div>
   );
 };

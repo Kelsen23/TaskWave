@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import TaskManager from "./components/TaskManager";
 import Authentication from "./components/Authentication";
@@ -6,11 +6,15 @@ import { useEffect } from "react";
 import { useAuthStore } from "./store/useAuthStore";
 
 const App = () => {
-  const { isLoggedIn } = useAuthStore();
+  const { isLoggedIn, users } = useAuthStore();
 
   useEffect(() => {
     localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(users));
+  }, [users]);
 
   return (
     <div>
