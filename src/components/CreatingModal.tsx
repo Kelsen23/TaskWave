@@ -1,6 +1,6 @@
 import { useTaskStore, type TaskProps } from "@/store/useTaskStore";
 import type { UseMutationResult } from "@tanstack/react-query";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const CreatingModal = ({ addTaskMutation }: { addTaskMutation: UseMutationResult<any, Error, TaskProps> }) => {
@@ -12,10 +12,7 @@ const CreatingModal = ({ addTaskMutation }: { addTaskMutation: UseMutationResult
     setIsAdding(isCreatingTask);
   }, [isCreatingTask]);
 
-  if (!isAdding) return null;
-
   return (
-    <AnimatePresence>
       <motion.div
         key="modal"
         initial={{ opacity: 0 }}
@@ -41,7 +38,7 @@ const CreatingModal = ({ addTaskMutation }: { addTaskMutation: UseMutationResult
             <input
               type="text"
               placeholder="Task Title"
-              value={isAdding.title}
+              value={isAdding?.title}
               onChange={(e) =>
                 setIsAdding((prev) =>
                   prev ? { ...prev, title: e.target.value } : prev
@@ -52,7 +49,7 @@ const CreatingModal = ({ addTaskMutation }: { addTaskMutation: UseMutationResult
             />
 
             <select
-              value={isAdding.status}
+              value={isAdding?.status}
               onChange={(e) =>
                 setIsAdding((prev) =>
                   prev ? { ...prev, status: e.target.value } : prev
@@ -65,7 +62,7 @@ const CreatingModal = ({ addTaskMutation }: { addTaskMutation: UseMutationResult
             </select>
 
             <select
-              value={isAdding.priority}
+              value={isAdding?.priority}
               onChange={(e) =>
                 setIsAdding((prev) =>
                   prev ? { ...prev, priority: e.target.value } : prev
@@ -81,7 +78,7 @@ const CreatingModal = ({ addTaskMutation }: { addTaskMutation: UseMutationResult
             <input
               type="date"
               value={
-                isAdding.dueDate
+                isAdding?.dueDate
                   ? new Date(isAdding.dueDate).toISOString().split("T")[0]
                   : ""
               }
@@ -111,7 +108,6 @@ const CreatingModal = ({ addTaskMutation }: { addTaskMutation: UseMutationResult
           </form>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
   );
 };
 

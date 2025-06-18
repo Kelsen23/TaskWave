@@ -1,5 +1,5 @@
 import { useTaskStore, type TaskProps } from "@/store/useTaskStore";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Calendar, Pencil, Trash } from "lucide-react";
 import type { UseMutationResult } from "@tanstack/react-query";
 
@@ -21,7 +21,7 @@ const Task = ({
       exit={{ opacity: 0, y: 10 }}
       transition={{
         ease: "easeInOut",
-        duration: 300,
+        duration: 0.3,
         type: "spring",
         stiffness: 400,
         delay: index * 0.1,
