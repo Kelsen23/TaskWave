@@ -173,11 +173,12 @@ const TaskManager = () => {
             animate={{ opacity: 1 }}
             className="p-4 bg-gray-100 rounded-md my-10 mr-20 flex flex-col gap-2"
           >
-            {tasks.map((task) => (
+            {tasks.map((task, index) => (
               <Task
                 key={task.id}
                 deleteTaskMutation={deleteTaskMutation}
                 task={task}
+                index={index}
               />
             ))}
           </motion.div>

@@ -6,9 +6,11 @@ import type { UseMutationResult } from "@tanstack/react-query";
 const Task = ({
   task,
   deleteTaskMutation,
+  index,
 }: {
   task: TaskProps;
   deleteTaskMutation: UseMutationResult<any, Error, string>;
+  index: number;
 }) => {
   const { setIsEditing } = useTaskStore();
 
@@ -22,7 +24,7 @@ const Task = ({
         duration: 300,
         type: "spring",
         stiffness: 400,
-        delay: Number(task.id) * 0.1,
+        delay: index * 0.1,
       }}
       className="w-full bg-white backdrop-blur-md rounded-md py-4 px-3 flex  justify-between items-center"
     >
