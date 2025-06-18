@@ -26,12 +26,14 @@ const Task = ({
         stiffness: 400,
         delay: index * 0.1,
       }}
-      className="w-full bg-white backdrop-blur-md rounded-md py-4 px-3 flex  justify-between items-center"
+      className="w-110 backdrop-blur-md bg-white rounded-xl flex flex-row justify-between"
     >
-      <div className="flex flex-row gap-5">
-        <div className="font-bold">{task.title}</div>
+      <div className="flex flex-col gap-4">
+        <div className="font-bold text-xl">{task.title}</div>
 
-        <div>ID: {task.id}</div>
+        <div className="flex flex-row items-center gap-2">
+          ID: <div className="bg-gray-200  p-1 rounded-sm">{task.id}</div>
+        </div>
 
         <div className="flex flex-row gap-2 items-center">
           Due Date: <span className="text-gray-500">{task.dueDate}</span>
@@ -49,7 +51,7 @@ const Task = ({
                 : "text-red-500"
             }`}
           >
-            {task.priority}
+            {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
           </span>
         </div>
 
@@ -60,12 +62,12 @@ const Task = ({
               task.status === "pending" ? "text-yellow-400" : "text-green-400"
             }`}
           >
-            {task.status}
+            {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
           </span>
         </div>
       </div>
 
-      <div className="flex flex-row items-center gap-2">
+      <div className="flex flex-row items-center gap-2 justify-end mt-auto">
         <button
           onClick={() => setIsEditing(task)}
           type="button"

@@ -168,11 +168,7 @@ const TaskManager = () => {
         <p className="font-semibold text-3xl">My Tasks</p>
 
         {tasks && tasks.length > 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="p-4 bg-gray-100 rounded-md my-10 mr-20 flex flex-col gap-2"
-          >
+          <div className="w-full p-3 rounded-md my-10 mr-20 justify-items-center grid grid-cols-1 sm:grid-cols-1 justify-center md:grid-cols-1 lg:grid-cols-2 gap-8">
             {tasks.map((task, index) => (
               <Task
                 key={task.id}
@@ -181,7 +177,7 @@ const TaskManager = () => {
                 index={index}
               />
             ))}
-          </motion.div>
+          </div>
         ) : (
           <p className="font-semibold text-lg mt-20 ml-10 text-gray-400">
             No tasks yet
