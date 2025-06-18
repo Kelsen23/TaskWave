@@ -4,7 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
 
-const Nav = () => {
+const Nav = ({
+  setIsMenuOpen,
+}: {
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [profileIsHovered, setProfileIsHovered] = useState(false);
 
   const { isLoggedIn } = useAuthStore();
@@ -16,11 +20,11 @@ const Nav = () => {
         <span className="text-blue-500">Wave🌊</span>
       </div>
 
-      <div className="flex flex-row items-center gap-5">
+      <div className="flex flex-row items-center gap-4">
         <motion.div
           onMouseEnter={() => setProfileIsHovered(true)}
           onMouseLeave={() => setProfileIsHovered(false)}
-          className="relative" 
+          className="relative"
         >
           <Avatar>
             <AvatarImage
@@ -42,7 +46,7 @@ const Nav = () => {
                   damping: 15,
                   bounce: 0.8,
                 }}
-                className="pointer-events-none absolute bg-gray-50 top-12 left-1/2 -translate-x-1/2 z-50 text-black p-2 rounded-b-md rounded-t-none shadow-md whitespace-nowrap before:content-[''] before:absolute before:top-[-6px] before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-x-transparent before:border-b-gray-50 before:border-t-0"
+                className="pointer-events-none absolute bg-gray-50 top-12 left-1/2 -translate-x-1/2 z-10 text-black p-2 rounded-b-md rounded-t-none shadow-md whitespace-nowrap before:content-[''] before:absolute before:top-[-6px] before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-x-transparent before:border-b-gray-50 before:border-t-0"
               >
                 {isLoggedIn?.username}
               </motion.div>
@@ -50,7 +54,11 @@ const Nav = () => {
           </AnimatePresence>
         </motion.div>
 
-        <Menu size={28} className="cursor-pointer" />
+        <Menu
+          onClick={() => setIsMenuOpen(true)}
+          size={33}
+          className="cursor-pointer hover:bg-gray-200 p-1 rounded-lg transition duration-200"
+        />
       </div>
     </nav>
   );
