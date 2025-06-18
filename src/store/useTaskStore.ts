@@ -51,7 +51,8 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
       filtered = filtered.filter(
         (task) =>
           task.title.includes(searchTerm.toLowerCase()) ||
-          task.dueDate.includes(searchTerm)
+          task.dueDate.includes(searchTerm) ||
+          task.id.includes(searchTerm)
       );
     }
 
@@ -75,13 +76,18 @@ export const useTaskStore = create<TaskStoreProps>((set, get) => ({
         id: crypto.randomUUID(),
         title: "",
         status: "pending",
-        dueDate: new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }),
+        dueDate: new Date().toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
         priority: "low",
       },
     }),
-  stopCreatingTask: () => set({
-    isCreatingTask: null,
-  }),
+  stopCreatingTask: () =>
+    set({
+      isCreatingTask: null,
+    }),
   deleteAll: () => ({ allTask: [], tasks: [] }),
   updateTask: (updatedTask) => {
     const { allTasks, isEditing } = get();
