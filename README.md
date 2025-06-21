@@ -39,7 +39,7 @@
 
 ## 📸 Screenshots
 
-> *Coming soon – Add images here of the main app UI (dashboard, task list, forms, etc.)*
+> *Coming soon*
 
 ---
 
