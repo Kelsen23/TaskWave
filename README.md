@@ -11,7 +11,7 @@
 - 🎯 **Task Fields**:
   - Title
   - Priority (High, Medium, Low)
-  - Status (Pending, In Progress, Completed)
+  - Status (Pending, Completed)
   - Due Date
 - 🔍 **Filtering & Search**:
   - Filter by **status**, **priority**, or **search term**.
