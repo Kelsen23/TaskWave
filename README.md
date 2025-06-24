@@ -1,8 +1,8 @@
 # TaskWave🌊
 
-**TaskWave** is a modern and fluid frontend task management application built with **React**. It offers an intuitive user experience for creating, managing, and organizing tasks efficiently. With animated transitions, sleek UI components, and robust state management, TaskWave makes productivity feel effortless.
+**TaskWave** is a modern and fluid **frontend-only** task management application built with **React**. It offers an intuitive user experience for creating, managing, and organizing tasks efficiently. With animated transitions, sleek UI components, and robust state management, TaskWave makes productivity feel effortless.
 
----
+> 🛠️ **Note:** This is a **frontend project only**. It uses **[`json-server`](https://github.com/typicode/json-server)** as a mock backend for development and testing purposes.
 
 ## ✨ Features
 
@@ -21,27 +21,22 @@
 - 🧭 **Routing** powered by React Router.
 - 📊 **Table & Mutation Handling** with TanStack Table & TanStack Query.
 
----
-
 ## 🛠️ Tech Stack
 
-| Library | Purpose |
-|--------|---------|
-| **React** | UI building |
-| **Zustand** | Global state management |
-| **Framer Motion** | Smooth page and component animations |
-| **Shadcn** | Modern UI components |
-| **Acernity UI** | Extra stylish UI elements |
-| **React Router** | Page routing and navigation |
-| **TanStack Query** | Async data handling (task creation/edit/delete) |
-
----
+| Library           | Purpose                                 |
+|------------------|-----------------------------------------|
+| **React**         | UI building                             |
+| **Zustand**       | Global state management                 |
+| **Framer Motion** | Smooth page and component animations    |
+| **Shadcn**        | Modern UI components                    |
+| **Acernity UI**   | Extra stylish UI elements               |
+| **React Router**  | Page routing and navigation             |
+| **TanStack Query**| Async data handling (task CRUD ops)     |
+| **json-server**   | Mock backend for local development      |
 
 ## 📸 Screenshots
 
 > *Coming soon*
-
----
 
 ## 🚀 Getting Started
 
